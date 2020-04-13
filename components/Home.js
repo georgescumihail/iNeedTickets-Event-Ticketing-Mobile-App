@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, ScrollView, StyleSheet } from 'react-native';
 import EventBox from './EventBox';
+import SearchBox from './SearchBox';
 
 class Home extends Component {
 
@@ -17,14 +18,27 @@ class Home extends Component {
     render() {
         return (
             <View>
-                <View>
+                <SearchBox />
+                <ScrollView contentContainerStyle={styles.homeContainer}>
                     {this.state.events.map(e => (
-                        <EventBox key={e.id} name={e.name} date={e.date} locationName={e.location.name} />
+                        <EventBox
+                            key={e.id}
+                            name={e.name}
+                            date={e.date}
+                            locationName={e.location.name}
+                            filename={e.photoLink} />
                     ))}
-                </View>
+                </ScrollView>
             </View>
         );
     }
 }
+
+const styles = StyleSheet.create({
+    homeContainer: {
+        alignItems: "center",
+        marginVertical: 30
+    }
+});
 
 export default Home;
