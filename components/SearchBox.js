@@ -5,7 +5,7 @@ const SearchBox = () => {
 
     return (
         <View style={styles.searchContainer}>
-            <TextInput style={styles.searchInput} />
+            <TextInput style={styles.searchInput} placeholder="Type something..." />
             <TouchableOpacity style={styles.searchButton}>
                 <Text style={styles.buttonText}>Search</Text>
             </TouchableOpacity>

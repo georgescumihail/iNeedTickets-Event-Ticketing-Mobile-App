@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, Dimensions, TouchableOpacity, StyleSheet } from 'react-native';
 
-class Header extends Component {
+class AppHeader extends Component {
 
     state = {
 
@@ -53,4 +53,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default Header;
+export default AppHeader;

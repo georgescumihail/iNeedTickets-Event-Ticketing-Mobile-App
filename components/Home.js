@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { View, Text, ScrollView, StyleSheet } from 'react-native';
 import EventBox from './EventBox';
 import SearchBox from './SearchBox';
+import AppHeader from './AppHeader';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import AppFooter from './AppFooter';
 
 class Home extends Component {
 
@@ -17,27 +20,35 @@ class Home extends Component {
 
     render() {
         return (
-            <View>
+            <View style={styles.homeContainer}>
+                <AppHeader />
                 <SearchBox />
-                <ScrollView contentContainerStyle={styles.homeContainer}>
+                <ScrollView contentContainerStyle={styles.eventsContainer}>
                     {this.state.events.map(e => (
-                        <EventBox
+                        <TouchableOpacity
                             key={e.id}
-                            name={e.name}
-                            date={e.date}
-                            locationName={e.location.name}
-                            filename={e.photoLink} />
+                            onPress={() => this.props.navigation.navigate("Event", { id: e.id })}>
+                            <EventBox
+                                key={e.id}
+                                name={e.name}
+                                date={e.date}
+                                locationName={e.location.name}
+                                filename={e.photoLink} />
+                        </TouchableOpacity>
                     ))}
+                    <AppFooter />
                 </ScrollView>
+
             </View>
         );
     }
 }
 
 const styles = StyleSheet.create({
-    homeContainer: {
+    eventsContainer: {
         alignItems: "center",
-        marginVertical: 30
+        marginTop: 30,
+        paddingBottom: 150
     }
 });
 
