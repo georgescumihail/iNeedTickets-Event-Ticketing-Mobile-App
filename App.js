@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
-import AppHeader from './components/AppHeader';
 import Home from './components/Home';
 import 'react-native-gesture-handler';
 import { NavigationContainer, StackActions } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import LoginScreen from './components/LoginScreen';
 import EventScreen from './components/EventScreen';
+import SearchScreen from './components/SearchScreen';
 
 const Stack = createStackNavigator();
 
@@ -37,6 +36,9 @@ class App extends Component {
               <Stack.Screen
                 name="Event"
                 component={EventScreen} />
+              <Stack.Screen
+                name="Search"
+                component={SearchScreen} />
             </>
           ) : (
               <>

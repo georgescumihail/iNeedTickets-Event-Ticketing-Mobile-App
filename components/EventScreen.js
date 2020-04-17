@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { View, Text, Image, StyleSheet, Dimensions } from 'react-native';
 import AppHeader from './AppHeader';
 import SearchBox from './SearchBox';
+import { GetEventById } from '../services/EventService';
+import { API_ROUTE } from '../services/Common';
 
 class EventScreen extends Component {
 
@@ -11,8 +13,7 @@ class EventScreen extends Component {
     }
 
     componentDidMount() {
-        fetch(`http://192.168.100.13:57868/api/events/${this.props.route.params.id}`)
-            .then(res => res.json())
+        GetEventById(this.props.route.params.id)
             .then(res => this.setState({ event: res, location: res.location }));
     }
 
@@ -23,7 +24,7 @@ class EventScreen extends Component {
                 <View style={styles.eventContainer}>
                     <Image
                         style={styles.eventImage}
-                        source={{ uri: "http://192.168.100.13:57868/api/image/event?filename=" + this.state.event.photoLink }}
+                        source={{ uri: API_ROUTE + "image/event?filename=" + this.state.event.photoLink }}
                     />
                     <Text style={styles.eventTitle}>{this.state.event.name}</Text>
                     <Text style={styles.eventDetails}>{this.state.location.name}</Text>

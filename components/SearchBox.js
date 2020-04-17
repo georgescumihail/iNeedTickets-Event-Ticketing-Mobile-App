@@ -1,16 +1,27 @@
 import React, { Component } from 'react';
 import { TextInput, Text, Button, View, StyleSheet, Dimensions, TouchableOpacity } from 'react-native';
 
-const SearchBox = () => {
+class SearchBox extends Component {
 
-    return (
-        <View style={styles.searchContainer}>
-            <TextInput style={styles.searchInput} placeholder="Type something..." />
-            <TouchableOpacity style={styles.searchButton}>
-                <Text style={styles.buttonText}>Search</Text>
-            </TouchableOpacity>
-        </View>
-    );
+    state = {
+        query: ""
+    };
+
+    render() {
+        return (
+            <View style={styles.searchContainer}>
+                <TextInput
+                    onChangeText={query => this.setState({ query })}
+                    style={styles.searchInput}
+                    placeholder="Type something..." />
+                <TouchableOpacity
+                    style={styles.searchButton}
+                    onPress={() => this.props.navigation.navigate("Search", { query: this.state.query.toLocaleLowerCase() })}>
+                    <Text style={styles.buttonText}>Search</Text>
+                </TouchableOpacity>
+            </View>
+        )
+    }
 }
 
 const styles = StyleSheet.create({

@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
+import { API_ROUTE } from '../services/Common';
 
 const EventBox = props => {
 
     return (
         <View style={styles.eventContainer}>
             <Image
-                source={{ uri: "http://192.168.100.13:57868/api/image/event?filename=" + props.filename }}
+                source={{ uri: API_ROUTE + "image/event?filename=" + props.filename }}
                 style={styles.eventImage}>
             </Image>
             <Text style={styles.eventTitle}>{props.name}</Text>

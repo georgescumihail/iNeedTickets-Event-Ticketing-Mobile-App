@@ -1,27 +1,23 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView, StyleSheet } from 'react-native';
-import EventBox from './EventBox';
-import SearchBox from './SearchBox';
+import { View, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import { GetEventsByQuery } from '../services/EventService';
 import AppHeader from './AppHeader';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import AppFooter from './AppFooter';
-import { GetEvents } from '../services/EventService';
+import SearchBox from './SearchBox';
+import EventBox from './EventBox';
 
-class Home extends Component {
-
+class SearchScreen extends Component {
     state = {
         events: []
-    };
+    }
 
     componentDidMount() {
-        GetEvents().then(res => this.setState({ events: res }));
+        GetEventsByQuery(this.props.route.params.query).then(res => this.setState({ events: res }));
     }
 
     render() {
         return (
             <View>
                 <AppHeader />
-                <SearchBox navigation={this.props.navigation} />
                 <ScrollView contentContainerStyle={styles.eventsContainer}>
                     {this.state.events.map(e => (
                         <TouchableOpacity
@@ -35,9 +31,7 @@ class Home extends Component {
                                 filename={e.photoLink} />
                         </TouchableOpacity>
                     ))}
-                    <AppFooter />
                 </ScrollView>
-
             </View>
         );
     }
@@ -51,4 +45,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default Home;
+export default SearchScreen;
